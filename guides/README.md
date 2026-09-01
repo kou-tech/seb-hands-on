@@ -28,10 +28,10 @@
 
 | ツール | バージョン | 役割 |
 |--------|-----------|------|
-| PHP | 8.5 | プログラムを動かす言語（Laravel 13 は 8.3 以上が必要） |
+| PHP | 8.4 | プログラムを動かす言語（Laravel 13 は 8.3 以上が必要） |
 | Laravel | 13.x | アプリの土台になるフレームワーク |
 | SQLite | 3 | 記事を保存するデータベース |
-| Node.js | 24 (LTS) | CSS / JavaScript を組み立てる道具 |
+| Node.js | 22 (LTS) | CSS / JavaScript を組み立てる道具 |
 | Tailwind CSS | v4 | 見た目を整える CSS の道具 |
 | Vite | 8 | CSS / JavaScript をまとめるツール |
 
