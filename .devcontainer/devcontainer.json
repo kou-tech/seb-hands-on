@@ -1,0 +1,28 @@
+{
+  "name": "Laravel ハンズオン（Codespaces）",
+  "image": "mcr.microsoft.com/devcontainers/php:1-8.4-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/vscode/.composer/vendor/bin",
+    "GITHUB_TOKEN": ""
+  },
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "ブログ",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "laravel.vscode-laravel",
+        "MS-CEINTL.vscode-language-pack-ja"
+      ]
+    }
+  }
+}
