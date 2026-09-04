@@ -60,4 +60,4 @@
 | 公開 | Render + Docker（FrankenPHP） | — |
 | バージョン管理 | Git / GitHub CLI | — |
 | エディタ | Visual Studio Code | — |
-| 対応OS | macOS / Windows | — |
+| 対応OS | macOS / Windows / Linux | Windows は PowerShell / WSL のどちらでも可 |

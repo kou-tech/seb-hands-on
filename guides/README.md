@@ -39,6 +39,24 @@
 > このガイドと違う手順が出てきたら、このガイドを優先してください。
 > 公式ドキュメント（日本語）: [https://readouble.com/laravel/13.x/ja/](https://readouble.com/laravel/13.x/ja/)
 
+## 対応している環境
+
+コマンドが分かれる場面では、以下の3つに分けて書いています。ご自身の環境に合うものを実行してください。
+
+| 見出し | 対象 | ターミナル |
+|--------|------|-----------|
+| macOS | Mac | ターミナル |
+| Windows | Windows | Windows PowerShell |
+| Linux / WSL | Ubuntu / Debian、および Windows の WSL | 端末（WSL はスタートメニューの「Ubuntu」） |
+
+Windows の方は、PowerShell と WSL のどちらでも最後まで進められます。
+はじめて環境構築をする方には PowerShell をおすすめします（手順が少なく、再起動も不要です）。
+
+WSL の入れ方と注意点は [03. インストール・レシピ](03.md) の付録にあります。
+
+> 💡 Linux は Ubuntu / Debian 系（`apt` を使うもの）を前提にしています。
+> Fedora や Arch などをお使いの方は、パッケージを入れるコマンドだけ読み替えてください。判断に迷ったらメンターに相談してください。
+
 ## ガイド一覧
 
 ### 準備編
