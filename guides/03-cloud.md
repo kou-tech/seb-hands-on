@@ -97,15 +97,91 @@ laravel --version
 
 すべて表示されたら準備完了です。[04. ブログを作ろう](./04.md) に進んでください。
 
+> ⚠️ 04 の Step 1 が終わったら、このページの「04 以降の読み替え ①」に戻ってきてください。
+> Codespaces では1回だけURLの設定が必要です。これを飛ばすと、デザインが当たらずリンクも動きません。
+
 > メンター視点
 > - `command not found` が出たら、Step 2 の準備作業がまだ終わっていない可能性が高いです。1分ほど待ってターミナルを開き直してください
 > - それでも出ない場合は、画面左下の緑色の部分をクリック →「Rebuild Container」でやり直せます
 
 ## 04 以降の読み替え
 
-3か所だけ、ガイドの書き方と画面が違います。
+4か所だけ、ガイドの書き方と画面が違います。
+①は必ず必要な作業です。②〜④は読み替えるだけです。
 
-### ① ブログを開くとき
+### ① プロジェクトを作った直後に、URLの設定をする
+
+`04.md` の Step 1 で `laravel new blog-app` が終わったら、続けてこの作業をしてください。
+
+Codespaces では、ブラウザとアプリの間に GitHub の転送がはさまります。
+そのままだと Laravel は自分のURLを `http://localhost:8000` だと思い込み、
+CSS が読み込まれず、リンクもすべて自分のパソコンの中を指してしまいます。
+
+#### 1-1. 自分のURLを .env に書く
+
+`blog-app` フォルダの中で、以下をコピー＆ペーストしてください。
+
+```bash
+sed -i "s|^APP_URL=.*|APP_URL=https://$CODESPACE_NAME-8000.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN|" .env
+```
+
+自分のURLは Codespaces が教えてくれるので、手で打つ必要はありません。
+確認したいときは以下を実行すると、書き込まれた値が表示されます。
+
+```bash
+grep APP_URL .env
+```
+
+#### 1-2. app/Providers/AppServiceProvider.php を書き換える
+
+`app/Providers/AppServiceProvider.php` を開いて、2か所を書き換えます。
+
+変更前
+
+```php
+use Illuminate\Support\ServiceProvider;
+```
+
+変更後
+
+```php
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\ServiceProvider;
+```
+
+変更前
+
+```php
+    public function boot(): void
+    {
+        //
+    }
+```
+
+変更後
+
+```php
+    public function boot(): void
+    {
+        // Codespaces から開いたとき、リンクとCSSのURLを転送URLに合わせる
+        if (str_starts_with(config('app.url'), 'https://')) {
+            URL::forceRootUrl(config('app.url'));
+            URL::forceScheme('https');
+        }
+    }
+```
+
+これで、CSS もリンクも正しいURLで組み立てられるようになります。
+
+> 💡 07 で公開するときは、この設定は自動的に働かなくなります。
+> 公開サーバー側では `07.md` の `trustProxies` が同じ役割をします。そのまま進めて大丈夫です。
+
+> メンター視点
+> - この作業を飛ばすと、画面は出るのにデザインが当たらず、リンクを押すと「接続できません」になります
+> - ブラウザの検証ツール（Console）に `localhost:8000` へのエラーが並んでいたら、ここの作業漏れです
+> - `sed` の行は blog-app フォルダの中で実行してください。`pwd` で確認できます
+
+### ② ブログを開くとき
 
 ガイドには `http://localhost:8000` を開くと書いてあります。
 
@@ -117,12 +193,12 @@ Codespaces では、`php artisan serve` を実行すると、
 
 > 💡 このURLは自分にしか見えません。他の人に見せられるURLは 07 で手に入ります。
 
-### ② ファイルを開くとき
+### ③ ファイルを開くとき
 
 VS Code のインストール（03 の ③）は不要です。ブラウザの中の VS Code をそのまま使ってください。
 左側のファイル一覧の使い方は、パソコンに入れた VS Code と同じです。
 
-### ③ 06 でコードをアップロードするとき
+### ④ 06 でコードをアップロードするとき
 
 `06.md` の Step 2（GitHub CLI のインストール）は不要です。`gh` は最初から入っています。
 Step 3（`git config`）から始めてください。
