@@ -7,8 +7,7 @@
   },
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "remoteEnv": {
-    "PATH": "${containerEnv:PATH}:/home/vscode/.composer/vendor/bin",
-    "GITHUB_TOKEN": ""
+    "PATH": "${containerEnv:PATH}:/home/vscode/.composer/vendor/bin"
   },
   "forwardPorts": [8000],
   "portsAttributes": {
